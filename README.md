@@ -16,3 +16,16 @@
 │   └── ...
 ├── ...
 ```
+
+3. Create a virtual environment and activate (most IDEs can do this for you)
+
+```bash
+>> python3 -m venv venv
+>> source venv/bin/activate
+```
+
+4. Start the Jupyter server (most IDEs can do this for you)
+
+```bash
+>> jupyter lab
+```
