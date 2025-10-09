@@ -24,7 +24,14 @@
 >> source venv/bin/activate
 ```
 
-4. Start the Jupyter server (most IDEs can do this for you)
+4. Add required libraries
+
+```bash
+>> pip3 install --upgrade pip
+>> pip3 install -r requirements.txt
+```
+
+5. Start the Jupyter server (most IDEs will do this for you)
 
 ```bash
 >> jupyter lab
