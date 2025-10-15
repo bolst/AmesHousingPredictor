@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "obm1rtHhIig=",
+  "dgSpecHash": "soad4FnjeqQ=",
   "success": true,
   "projectFilePath": "/Users/nic/git/AmesHousingPredictor/web/AmesHousing/AmesHousing/AmesHousing.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,8 @@
     "/Users/nic/.nuget/packages/microsoft.extensions.fileproviders.abstractions/9.0.3/microsoft.extensions.fileproviders.abstractions.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.extensions.fileproviders.physical/9.0.3/microsoft.extensions.fileproviders.physical.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.extensions.filesystemglobbing/9.0.3/microsoft.extensions.filesystemglobbing.9.0.3.nupkg.sha512",
+    "/Users/nic/.nuget/packages/microsoft.extensions.localization/9.0.1/microsoft.extensions.localization.9.0.1.nupkg.sha512",
+    "/Users/nic/.nuget/packages/microsoft.extensions.localization.abstractions/9.0.1/microsoft.extensions.localization.abstractions.9.0.1.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.extensions.logging/9.0.3/microsoft.extensions.logging.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.3/microsoft.extensions.logging.abstractions.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.extensions.options/9.0.3/microsoft.extensions.options.9.0.3.nupkg.sha512",
@@ -30,6 +32,7 @@
     "/Users/nic/.nuget/packages/microsoft.jsinterop.webassembly/9.0.3/microsoft.jsinterop.webassembly.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.net.illink.tasks/9.0.3/microsoft.net.illink.tasks.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.net.sdk.webassembly.pack/9.0.3/microsoft.net.sdk.webassembly.pack.9.0.3.nupkg.sha512",
+    "/Users/nic/.nuget/packages/mudblazor/8.13.0/mudblazor.8.13.0.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/9.0.3/microsoft.netcore.app.runtime.mono.browser-wasm.9.0.3.nupkg.sha512"
   ],
   "logs": []
