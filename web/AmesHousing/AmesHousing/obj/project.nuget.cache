@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "soad4FnjeqQ=",
+  "dgSpecHash": "tT8ZEEnx6Q4=",
   "success": true,
   "projectFilePath": "/Users/nic/git/AmesHousingPredictor/web/AmesHousing/AmesHousing/AmesHousing.csproj",
   "expectedPackageFiles": [
+    "/Users/nic/.nuget/packages/blazored.localstorage/4.5.0/blazored.localstorage.4.5.0.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.aspnetcore.authorization/9.0.3/microsoft.aspnetcore.authorization.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.aspnetcore.components/9.0.3/microsoft.aspnetcore.components.9.0.3.nupkg.sha512",
     "/Users/nic/.nuget/packages/microsoft.aspnetcore.components.analyzers/9.0.3/microsoft.aspnetcore.components.analyzers.9.0.3.nupkg.sha512",
