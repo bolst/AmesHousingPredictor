@@ -161,6 +161,6 @@ public record HouseFeatures
 
     public string SaleCondition { get; set; }
 
-    public int SalePrice { get; set; }
+    public int? SalePrice { get; set; }
 
 }
