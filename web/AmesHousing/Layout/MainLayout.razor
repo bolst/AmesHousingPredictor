@@ -2,7 +2,7 @@
 
 @inherits LayoutComponentBase
 
-<MudThemeProvider @bind-IsDarkMode="_isDarkMode" />
+<MudThemeProvider @bind-IsDarkMode="_isDarkMode" Theme="_theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -25,6 +25,24 @@
 @code {
 
     private bool _isDarkMode;
+    
+    private MudTheme _theme = new()
+    {
+        PaletteDark = new()
+        {
+            Surface = "#191919",
+            Background = "#191919",
+            DrawerBackground = "#191919",
+            DrawerText = "#E0E0E0",
+            DrawerIcon = "#E0E0E0",
+            AppbarBackground = "#111111",
+        },
+        LayoutProperties = new LayoutProperties()
+        {
+            DefaultBorderRadius = "10px",
+            AppbarHeight = "45px",
+        }
+    };
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

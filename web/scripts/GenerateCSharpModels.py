@@ -14,10 +14,10 @@ def main(filepath):
         'float64': 'double'
     }
 
-    allClassesStr = '''namespace AmesHousing.Models;
+    allClassesStr = '''namespace AmesHousing.Api;
 
-    public record HouseFeatures
-    {
+public record AmesHouse
+{
     '''
 
     for column, ctype in columns:
@@ -26,21 +26,22 @@ def main(filepath):
         if column[0].isdigit():
             column = 'n' + column
 
+        if column == 'SalePrice':
+            cSharpType += '?' # SalePrice can be null
+
         if cSharpType:
             allClassesStr += f'''
-        public {cSharpType} {column} {{ get; set; }}
+    public {cSharpType} {column} {{ get; set; }}
     '''
 
-    allClassesStr += '''
-    }
-    '''
+    allClassesStr += '\n}'
 
     print('done. output:')
     print(allClassesStr)
 
-    os.makedirs('../AmesHousing/Models', exist_ok=True)
+    os.makedirs(basePath := '../AmesHousing/Api/Models', exist_ok=True)
 
-    with open('../AmesHousing/Models/HouseFeatures.cs', 'w+') as outfile:
+    with open(f'{basePath}/AmesHouse.cs', 'w+') as outfile:
         outfile.write(allClassesStr)
 
 
