@@ -2,7 +2,7 @@ namespace AmesHousing.Api;
 
 public class AmesHousingApiService : IAmesHousingApiService
 {
-    public async Task<IEnumerable<AmesHouse>> GetPricedHousesAsync(int page, int amount)
+    public async Task<GetPricedHousesResponse> GetPricedHousesAsync(int page, int amount)
     {
         throw new NotImplementedException();
     }

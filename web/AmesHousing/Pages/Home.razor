@@ -1,7 +1,61 @@
 ﻿@page "/"
 
+@inject IAmesHousingApiService AmesHousingApi
+
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<MudDataGrid @ref="_dataGrid" T="AmesHouse" ServerData="GetHouseDataAsync">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="s => OnSearch(s)" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Variant="Variant.Outlined" />
+    </ToolBarContent>
+    <Columns>
+        <HierarchyColumn T="AmesHouse" />
+        <PropertyColumn Title="Year Built" Property="x => x.YearBuilt" />
+        <PropertyColumn Title="$" Property="x => x.SalePrice" Format="C" />
+    </Columns>
+    <ChildRowContent>
+        
+    </ChildRowContent>
+    <PagerContent>
+        <MudDataGridPager T="AmesHouse" />
+    </PagerContent>
+</MudDataGrid>
 
-Welcome to your new app.
+
+@code {
+
+    private MudDataGrid<AmesHouse> _dataGrid = null!;
+    private string _searchQuery = string.Empty;
+    
+    private async Task<GridData<AmesHouse>> GetHouseDataAsync(GridState<AmesHouse> state)
+    {
+        var response = await AmesHousingApi.GetPricedHousesAsync(state.Page, state.PageSize);
+
+        var houses = response.Houses.Where(HouseSearchPredicate);
+        
+        return new GridData<AmesHouse>
+        {
+            Items = houses,
+            TotalItems = response.TotalItems
+        };
+    }
+
+    private bool HouseSearchPredicate(AmesHouse house)
+    {
+        return false;
+    }
+
+    private Task OnSearch(string searchQuery)
+    {
+        if (searchQuery.Length < 3)
+            searchQuery = string.Empty;
+        
+        if (searchQuery == _searchQuery)
+            return Task.CompletedTask;
+
+        _searchQuery = searchQuery;
+        return _dataGrid.ReloadServerData();
+    }
+
+}
