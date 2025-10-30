@@ -5,6 +5,8 @@ data/*
 notebooks/outputs
 
 models
+submissions
+mlruns
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
