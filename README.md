@@ -2,37 +2,24 @@
 
 ## Using notebooks
 
-1. Download the dataset from the [Kaggle Repo](https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview)
-2. Place extracted folder into `data` folder. Structure should look like:
+This project uses [uv](https://github.com/astral-sh/uv) for package management. You can install it by running
 
 ```bash
-.
-├── data
-│   └── house-prices-advanced-regression-techniques
-│       ├── data_description.txt
-│       ├── test.csv
-│       └── train.csv
-├── notebooks
-│   └── ...
-├── ...
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv self update
 ```
 
-3. Create a virtual environment and activate (most IDEs can do this for you)
-
 ```bash
->> python3 -m venv venv
->> source venv/bin/activate
+# On Windows.
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+uv self update
 ```
 
-4. Add required libraries
+Once [uv](https://github.com/astral-sh/uv) is installed you just need to create a virtual environment, activate it, and sync
 
 ```bash
->> pip3 install --upgrade pip
->> pip3 install -r requirements.txt
-```
-
-5. Start the Jupyter server (most IDEs will do this for you)
-
-```bash
->> jupyter lab
+uv venv
+source .venv/bin/activate
+uv sync
 ```
