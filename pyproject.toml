@@ -11,8 +11,9 @@ dependencies = [
     "matplotlib>=3.9.4",
     "mlflow>=3.1.4",
     "numpy>=2.0.2",
+    "optuna>=4.5.0",
     "pandas>=2.3.3",
     "scipy>=1.13.1",
     "seaborn>=0.13.2",
-    "tool>=0.8.0",
+    "xgboost>=2.1.4",
 ]
