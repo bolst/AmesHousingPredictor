@@ -3,9 +3,10 @@
 set -euo pipefail
 
 NOTEBOOKS=(
-  "notebooks/1_data_ingestion.ipynb"
-  "notebooks/2_feature_engineering.ipynb"
-  "notebooks/3_model_training.ipynb"
+  "notebooks/phase0_kaggle_download.ipynb"
+  "notebooks/phase1_eda.ipynb"
+  "notebooks/phase2_model_training.ipynb"
+  "notebooks/phase3_kaggle_submission.ipynb"
 )
 
 for notebook in "${NOTEBOOKS[@]}"; do
