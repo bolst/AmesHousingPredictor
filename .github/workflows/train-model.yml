@@ -1,0 +1,37 @@
+name: Train Model Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  execute-notebooks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run data ingestion notebook
+        run: |
+          jupyter nbconvert --execute --to notebook --inplace notebooks/1_data_ingestion.ipynb
+
+      - name: Run feature engineering notebook
+        run: |
+          jupyter nbconvert --execute --to notebook --inplace notebooks/2_feature_engineering.ipynb
+
+      - name: Run model training notebook
+        run: |
+          jupyter nbconvert --execute --to notebook --inplace notebooks/3_model_training.ipynb
