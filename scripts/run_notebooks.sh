@@ -6,6 +6,7 @@ set -e
 # activate
 uv venv --clear
 source .venv/bin/activate
+uv sync --locked
 
 NOTEBOOKS=(
   "notebooks/phase0_kaggle_download.ipynb"
