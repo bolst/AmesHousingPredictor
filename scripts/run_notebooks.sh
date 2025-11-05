@@ -5,6 +5,7 @@ set -e
 
 uv venv --clear
 source .venv/bin/activate
+uv sync
 
 jupyter nbconvert --to notebook --execute notebooks/phase0_kaggle_download.ipynb
 rm notebooks/phase0_kaggle_download.nbconvert.ipynb
