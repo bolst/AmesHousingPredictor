@@ -17,19 +17,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
-          python-version: "3.11"
+          version: "0.9.5"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: ".python-version"
 
       - name: Install dependencies
+        run: uv sync --locked --all-extras
+
+      - name: Create env file
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          touch .env
+          echo KAGGLE_username=${{ secrets.KAGGLE_USERNAME }} >> .env
+          echo KAGGLE_key=${{ secrets.KAGGLE_KEY }} >> .env
 
       - name: Run training pipeline
-        run: |
-          ./scripts/run_notebooks.sh
+        run: ./scripts/run_notebooks.sh
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3

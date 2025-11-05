@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+# exit if fail
+set -e
+
+# activate
+uv venv --clear
+source .venv/bin/activate
+uv sync --locked --all-extras
 
 NOTEBOOKS=(
   "notebooks/phase0_kaggle_download.ipynb"
