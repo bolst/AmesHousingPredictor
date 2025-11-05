@@ -20,7 +20,7 @@ jobs:
           version: "0.9.5"
 
       - name: Set up Python
-        run: uv python install
+        uses: actions/setup-python@v6
         with:
           python-version-file: "pyproject.toml"
 
