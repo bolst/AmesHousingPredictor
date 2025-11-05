@@ -3,6 +3,10 @@
 # exit if fail
 set -e
 
+# activate
+uv venv --clear
+source .venv/bin/activate
+
 NOTEBOOKS=(
   "notebooks/phase0_kaggle_download.ipynb"
   "notebooks/phase1_eda.ipynb"
