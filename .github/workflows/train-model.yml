@@ -24,14 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run data ingestion notebook
+      - name: Run training pipeline
         run: |
-          jupyter nbconvert --execute --to notebook --inplace notebooks/1_data_ingestion.ipynb
-
-      - name: Run feature engineering notebook
-        run: |
-          jupyter nbconvert --execute --to notebook --inplace notebooks/2_feature_engineering.ipynb
-
-      - name: Run model training notebook
-        run: |
-          jupyter nbconvert --execute --to notebook --inplace notebooks/3_model_training.ipynb
+          ./scripts/run_notebooks.sh

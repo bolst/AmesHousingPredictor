@@ -1,19 +1,14 @@
-#! /usr/bin/env sh
+#!/usr/bin/env bash
 
-# exit in case of error
-set -e
+set -euo pipefail
 
-uv venv --clear
-source .venv/bin/activate
+NOTEBOOKS=(
+  "notebooks/1_data_ingestion.ipynb"
+  "notebooks/2_feature_engineering.ipynb"
+  "notebooks/3_model_training.ipynb"
+)
 
-jupyter nbconvert --to notebook --execute notebooks/phase0_kaggle_download.ipynb
-rm notebooks/phase0_kaggle_download.nbconvert.ipynb
-
-jupyter nbconvert --to notebook --execute notebooks/phase1_eda.ipynb
-rm notebooks/phase1_eda.nbconvert.ipynb
-
-jupyter nbconvert --to notebook --execute notebooks/phase2_model_training.ipynb
-rm notebooks/phase2_model_training.nbconvert.ipynb
-
-jupyter nbconvert --to notebook --execute notebooks/phase3_kaggle_submission.ipynb
-rm notebooks/phase3_kaggle_submission.nbconvert.ipynb
+for notebook in "${NOTEBOOKS[@]}"; do
+  echo "Executing ${notebook}"
+  jupyter nbconvert --execute --to notebook --inplace "${notebook}"
+done
