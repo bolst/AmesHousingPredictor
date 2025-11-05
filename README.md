@@ -26,7 +26,7 @@ uv sync
 
 ## Serving the model via Docker
 
-1. Run the training workflow so the following artifacts exist in the `models/` directory:
+1. Run the training workflow via `./scripts/run_notebooks/sh` so the following artifacts exist in the `models/` directory:
    - `feature_preprocessor.joblib`
    - `target_transformer.joblib` (optional but recommended)
    - `optimized_xgboost.joblib` (falls back to `baseline_xgboost.joblib` if present)
