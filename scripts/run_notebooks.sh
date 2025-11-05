@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-set -euo pipefail
+# exit if fail
+set -e
 
 NOTEBOOKS=(
   "notebooks/phase0_kaggle_download.ipynb"
