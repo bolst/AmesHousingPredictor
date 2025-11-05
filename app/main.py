@@ -90,19 +90,20 @@ def _load_model_artifacts() -> tuple[Any, Any, Optional[Any], Path]:
 FEATURE_PREPROCESSOR, MODEL, TARGET_TRANSFORMER, MODEL_PATH = _load_model_artifacts()
 
 
-"""
-Healthcheck endpoint to verify that the service is running.
-"""
 @app.get("/health", response_model=dict[str, str])
 def healthcheck() -> dict[str, str]:
+    """
+    Healthcheck endpoint to verify that the service is running.
+    """
     return {"status": "ok"}
 
 
-"""
-Endpoint that accepts feature data, runs the data through the model, and returns a sale price prediction.
-"""
 @app.post("/predict", response_model=PredictionResponse)
 def predict(request: PredictionRequest) -> PredictionResponse:
+    """
+    Endpoint that accepts feature data, runs the data through the model,
+    and returns a sale price prediction.
+    """
     if FEATURE_PREPROCESSOR is None or MODEL is None:
         raise HTTPException(
             status_code=500,
