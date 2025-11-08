@@ -1,7 +1,0 @@
-fastapi==0.115.5
-uvicorn[standard]==0.32.1
-pandas==2.3.3
-numpy==2.2.6
-scikit-learn==1.7.2
-xgboost==3.0.5
-joblib==1.5.2

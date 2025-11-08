@@ -50,10 +50,7 @@ def _load_model_artifacts() -> tuple[Any, Any, Optional[Any], Path]:
         "TARGET_TRANSFORMER_PATH", model_dir / "target_transformer.joblib"
     )
 
-    # Allow model override while keeping sensible defaults.
-    configured_model_path = os.getenv("MODEL_PATH")
     candidate_paths = [
-        Path(configured_model_path) if configured_model_path else None,
         model_dir / "optimized_xgboost.joblib",
         model_dir / "baseline_xgboost.joblib",
     ]
@@ -61,6 +58,8 @@ def _load_model_artifacts() -> tuple[Any, Any, Optional[Any], Path]:
     model_path = next((candidate for candidate in candidate_paths if candidate and candidate.exists()), None)
     if not model_path:
         raise FileNotFoundError(
+            f"model dir: {model_dir}\n"
+            f"ls: {os.listdir('.')}\n"
             "No trained model artifact found. Ensure the training pipeline has written "
             "an XGBoost model to the models directory."
         )
