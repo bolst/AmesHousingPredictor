@@ -1,0 +1,10 @@
+
+name: Ames Housing API
+
+services:
+  ames-housing-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000

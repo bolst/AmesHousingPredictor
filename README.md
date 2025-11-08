@@ -30,21 +30,17 @@ uv sync
    - `feature_preprocessor.joblib`
    - `target_transformer.joblib` (optional but recommended)
    - `optimized_xgboost.joblib` (falls back to `baseline_xgboost.joblib` if present)
-2. Build the API container:
+2. Build and run the API:
    ```bash
-   docker build -t ames-housing-api .
+   docker compose up
    ```
-3. Start the container and mount the models directory:
-   ```bash
-   docker run -p 8000:8000 -v "$(pwd)/models:/models" ames-housing-api
-   ```
-4. Send a prediction request with inline JSON:
+3. Send a prediction request with inline JSON:
    ```bash
    curl -X POST "http://localhost:8000/predict" \
      -H "Content-Type: application/json" \
      -d '{"features": {"OverallQual": 7, "GrLivArea": 1710, "YearBuilt": 2003, "Neighborhood": "CollgCr"}}'
    ```
-5. Or use the full example payload stored at `examples/sample_request.json` (generated from the first row of `train.csv`):
+4. Or use the full example payload stored at `examples/sample_request.json` (generated from the first row of `train.csv`):
    ```bash
    curl -X POST "http://localhost:8000/predict" \
      -H "Content-Type: application/json" \
@@ -52,7 +48,6 @@ uv sync
    ```
 
 Environment variables:
-- `MODEL_DIR` (default: `/models`) – directory containing the serialized artifacts.
 - `MODEL_PATH`, `FEATURE_PREPROCESSOR_PATH`, `TARGET_TRANSFORMER_PATH` – override specific files when needed.
 
 On Railway, create a persistent volume that holds the model artifacts and mount it at `/models`, keeping port `8000` exposed.
