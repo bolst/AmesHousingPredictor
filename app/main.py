@@ -58,8 +58,6 @@ def _load_model_artifacts() -> tuple[Any, Any, Optional[Any], Path]:
     model_path = next((candidate for candidate in candidate_paths if candidate and candidate.exists()), None)
     if not model_path:
         raise FileNotFoundError(
-            f"model dir: {model_dir}\n"
-            f"ls: {os.listdir('.')}\n"
             "No trained model artifact found. Ensure the training pipeline has written "
             "an XGBoost model to the models directory."
         )
