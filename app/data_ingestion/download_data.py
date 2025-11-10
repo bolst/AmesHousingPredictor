@@ -13,7 +13,7 @@ class DataDownloader:
         self.raw_data_dir = Path(settings.RAW_DATA_DIRECTORY)
 
 
-    def download_and_extract(self):
+    def download_and_extract(self) -> None:
         logger.info("Authenticating Kaggle...")
         from dotenv import load_dotenv; load_dotenv()
         from kaggle.api.kaggle_api_extended import KaggleApi
