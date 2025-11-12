@@ -1,13 +1,14 @@
 from app.data_ingestion.download_data import DataDownloader
 from app.data_ingestion.read_data import DataReader
-from app.config.settings import settings
 import pandas as pd
 
+import logging
+logging.basicConfig(level=logging.INFO)
 
-downloader = DataDownloader(settings=settings)
+downloader = DataDownloader()
 downloader.download_and_extract()
 
-reader = DataReader(settings=settings)
+reader = DataReader()
 data = reader.load_train_test()
 
 train: pd.DataFrame = data[0]

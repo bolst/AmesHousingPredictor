@@ -5,9 +5,12 @@ from zipfile import ZipFile
 import logging
 logger = logging.getLogger(__name__)
 
+from ..config.settings import settings
+
 class DataDownloader:
-    def __init__(self, settings):
-        self.settings = settings
+    
+    def __init__(self):
+        self.kaggle_competition = settings.KAGGLE_COMPETITION
         self.zip_path = Path(settings.KAGGLE_DOWNLOAD_PATH)
         self.data_dir = Path(settings.DATA_DIRECTORY)
         self.raw_data_dir = Path(settings.RAW_DATA_DIRECTORY)
@@ -21,7 +24,7 @@ class DataDownloader:
         api.authenticate()
 
         logger.info("Downloading Kaggle data...")
-        api.competition_download_files(self.settings.KAGGLE_COMPETITION, path=self.data_dir)
+        api.competition_download_files(self.kaggle_competition, path=self.data_dir)
 
         logger.info("Extracting zip file...")
         with ZipFile(self.zip_path, 'r') as zipfile:

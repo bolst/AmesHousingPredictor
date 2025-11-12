@@ -5,10 +5,11 @@ import numpy as np
 import logging
 logger = logging.getLogger(__name__)
 
+from ..config.settings import settings
 
 class DataReader:
-    def __init__(self, settings):
-        self.settings = settings
+
+    def __init__(self):
         self.raw_data_dir = Path(settings.RAW_DATA_DIRECTORY)
 
 
