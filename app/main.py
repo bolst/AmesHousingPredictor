@@ -5,17 +5,16 @@ from app.data_ingestion.download_data import DataDownloader
 from app.data_ingestion.read_data import DataReader
 from app.pipelines.preprocessing import get_fitted_pipelines
 from app.inference.predict import AmesPredictor
+from app.utils.logging_config import setup_logging
 
-import logging
+from loguru import logger
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("ames_predictor")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    setup_logging()
     # load data
     downloader = DataDownloader()
     downloader.download_and_extract()
@@ -24,6 +23,7 @@ async def lifespan(app: FastAPI):
     # get pipelines/transformers/models
     feature_preprocessor, target_transformer = get_fitted_pipelines(train)
     predictor = AmesPredictor(feature_preprocessor)
+    logger.info(f"model loaded with id: {predictor.model.model_id}")
     # attach to app lifespan
     yield {
         "predictor": predictor,

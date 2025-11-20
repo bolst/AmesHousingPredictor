@@ -10,6 +10,7 @@ dependencies = [
     "joblib>=1.5.2",
     "jupyter>=1.1.1",
     "kaggle>=1.7.4.5",
+    "loguru>=0.7.3",
     "matplotlib>=3.9.4",
     "mlflow>=3.1.4",
     "nbconvert>=7.16.6",
