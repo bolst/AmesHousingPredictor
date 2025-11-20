@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>House Price Estimator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="predict-api" content="__API_URL__" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>House Price Estimator</h1>
+      <p>Use the sliders and dropdowns to describe the home, then click <b>Predict</b> to see the latest estimated sale price.</p>
+    </div>
+
+    <div class="grid">
+      <!-- Controls -->
+      <div class="card">
+        <div class="card-header">
+          <p class="card-title">Configure Home</p>
+        </div>
+        <div class="card-body">
+         <div class="row">
+            <input id="apiUrl" type="hidden" value="__API_URL__" />
+         </div>
+
+          <div id="sliderControls"></div>
+
+          <div class="row">
+            <label class="label">Neighborhood</label>
+            <select id="Neighborhood">
+              <option>CollgCr</option><option>Veenker</option><option>Crawfor</option><option>NoRidge</option>
+              <option>Mitchel</option><option>Somerst</option><option>NWAmes</option><option>OldTown</option>
+              <option>BrkSide</option><option>Sawyer</option><option>NridgHt</option><option>NAmes</option>
+              <option>SawyerW</option><option>IDOTRR</option><option>MeadowV</option><option>Edwards</option>
+              <option>Timber</option><option>Gilbert</option><option>StoneBr</option><option>ClearCr</option>
+              <option>NPkVill</option><option>Blmngtn</option><option>BrDale</option><option>SWISU</option>
+              <option>Blueste</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label class="label">Kitchen Quality</label>
+            <select id="KitchenQual">
+              <option value="Ex">Excellent</option>
+              <option value="Gd" selected>Good</option>
+              <option value="TA">Typical</option>
+              <option value="Fa">Fair</option>
+              <option value="Po">Poor</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label class="label">Central Air</label>
+            <select id="CentralAir">
+              <option value="Y">Yes</option>
+              <option value="N">No</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label class="label">Sale Condition</label>
+            <select id="SaleCondition">
+              <option>Normal</option><option>Abnorml</option><option>AdjLand</option><option>Alloca</option>
+              <option>Family</option><option>Partial</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <button id="predictBtn">Predict Price</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output -->
+      <div class="card result-card">
+        <div class="card-header">
+          <p class="card-title">Prediction Output</p>
+        </div>
+        <div class="card-body">
+          <div class="price-highlight">
+            <div>
+              <div class="small">Estimated listing</div>
+              <div id="price" class="price">—</div>
+            </div>
+            <span id="resultStatus" class="status-pill status-pill--idle">Waiting for inputs</span>
+          </div>
+          <p class="meta-note">Adjust sliders to explore different pricing scenarios. We’ll show the most recent prediction here.</p>
+          <div class="result-meta">
+            <div>
+              <div class="meta-label">Source</div>
+              <div id="resultSource" class="meta-value">—</div>
+            </div>
+            <div>
+              <div class="meta-label">Last updated</div>
+              <div id="resultUpdated" class="meta-value">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>

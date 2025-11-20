@@ -10,6 +10,8 @@ import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 logging.basicConfig(level=logging.INFO)
@@ -39,6 +41,21 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     prediction: float = Field(..., description="Predicted sale price.")
     model_path: str = Field(..., description="Filesystem path of the model used for inference.")
+
+
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+INDEX_PATH = FRONTEND_DIR / "index.html"
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="frontend-static")
+
+
+@app.get("/", include_in_schema=False, response_class=HTMLResponse)
+def serve_frontend() -> HTMLResponse:
+    if not INDEX_PATH.exists():
+        raise HTTPException(status_code=404, detail="Frontend not built")
+    api_url = os.getenv("FRONTEND_API_URL", "http://127.0.0.1:8000/predict")
+    html = INDEX_PATH.read_text().replace("__API_URL__", api_url)
+    return HTMLResponse(html)
 
 
 def _resolve_path(env_key: str, default: Path) -> Path:
