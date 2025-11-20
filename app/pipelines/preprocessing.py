@@ -16,7 +16,7 @@ class FeatureEngineer(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
     
-    def transform(self, df: pd.DataFrame):
+    def transform(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
         # Total Square Footage
         df['TotalSF'] = df['GrLivArea'] + df['TotalBsmtSF']

@@ -11,13 +11,15 @@ logger = logging.getLogger(__name__)
 def get_model(model_name) -> PyFuncModel | None:
     search = mlflow.search_registered_models(filter_string=f"name = '{model_name}'")
     if not search:
-        return None
+        raise ArgumentError(f"Could not find any models with the name {model_name}")
 
     result = search[0]
     if not result.latest_versions:
-        return None
+        raise ArgumentError(f"No versions found for {model_name}")
 
-    model = mlflow.pyfunc.load_model(result.latest_versions[0].source)
+    source = result.latest_versions[0].source
+    model = mlflow.pyfunc.load_model(source)
+    logger.info(f"loaded model with id {model.model_id}")
     return model
 
 
