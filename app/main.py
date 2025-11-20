@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from app.routes import ames, health
 from app.data_ingestion.download_data import DataDownloader
 from app.data_ingestion.read_data import DataReader
@@ -23,7 +21,6 @@ async def lifespan(app: FastAPI):
     # get pipelines/transformers/models
     feature_preprocessor, target_transformer = get_fitted_pipelines(train)
     predictor = AmesPredictor(feature_preprocessor)
-    logger.info(f"model loaded with id: {predictor.model.model_id}")
     # attach to app lifespan
     yield {
         "predictor": predictor,

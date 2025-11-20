@@ -1,11 +1,9 @@
 from app.schemas.requests import PredictionRequest
 from app.schemas.responses import PredictionResponse
-
+from loguru import logger
 from fastapi import APIRouter, Request, HTTPException
 import pandas as pd
 
-import logging
-logger = logging.getLogger(__name__)
 
 ames_router = APIRouter(prefix="/api", tags=["api_v1"])
 

@@ -6,9 +6,8 @@ from sklearn.compose import ColumnTransformer
 from typing import Tuple
 import pandas as pd
 import numpy as np
+from loguru import logger
 
-import logging
-logger = logging.getLogger(__name__)
 
 
 class FeatureEngineer(BaseEstimator, TransformerMixin):

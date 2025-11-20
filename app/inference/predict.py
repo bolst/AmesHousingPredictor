@@ -1,12 +1,11 @@
 from argparse import ArgumentError
-
+from loguru import logger
 import mlflow
 from mlflow.pyfunc import PyFuncModel
 
 from ..config.settings import settings
 
-import logging
-logger = logging.getLogger(__name__)
+
 
 def get_model(model_name) -> PyFuncModel | None:
     search = mlflow.search_registered_models(filter_string=f"name = '{model_name}'")

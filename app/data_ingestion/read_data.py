@@ -1,9 +1,8 @@
 import pandas as pd
 from pathlib import Path
 import numpy as np
+from loguru import logger
 
-import logging
-logger = logging.getLogger(__name__)
 
 from ..config.settings import settings
 

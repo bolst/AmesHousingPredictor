@@ -1,9 +1,8 @@
 import os
 from pathlib import Path
 from zipfile import ZipFile
+from loguru import logger
 
-import logging
-logger = logging.getLogger(__name__)
 
 from ..config.settings import settings
 

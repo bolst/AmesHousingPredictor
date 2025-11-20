@@ -2,9 +2,8 @@ import mlflow
 import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from ..config.settings import settings
+from loguru import logger
 
-import logging
-logger = logging.getLogger(__name__)
 
 
 def evaluate_model(model, X, y, prefix=''):
