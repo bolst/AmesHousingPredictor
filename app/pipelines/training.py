@@ -20,7 +20,7 @@ def evaluate_model(model, X, y, prefix=''):
     }
 
 
-class ModelTrainer:
+class XGBModelTrainer:
 
     def __init__(
             self,
@@ -29,9 +29,12 @@ class ModelTrainer:
     ):
         self.experiment_name = experiment_name
         self.tracking_uri = tracking_uri
+        self.train_metrics = None
+        self.val_metrics = None
+        self.model_info = None
 
-        mlflow.set_experiment(experiment_name)
         mlflow.set_tracking_uri(tracking_uri)
+        self.experiment = mlflow.set_experiment(experiment_name)
 
     
     def train(self, model, model_name: str, X_train, y_train, X_test, y_test):
@@ -45,25 +48,25 @@ class ModelTrainer:
             )
             
             # get metrics
-            train_metrics = evaluate_model(model, X_train, y_train, prefix='train_')
-            val_metrics = evaluate_model(model, X_test, y_test, prefix='test_')
-            
+            self.train_metrics = evaluate_model(model, X_train, y_train, prefix='train_')
+            self.val_metrics = evaluate_model(model, X_test, y_test, prefix='val_')
+
             # log to mlflow
             mlflow.log_params(model.get_params())
-            mlflow.log_metrics({**train_metrics, **val_metrics})
-            mlflow.xgboost.log_model(
-                model, 
-                name=model_name, 
+            mlflow.log_metrics({**self.train_metrics, **self.val_metrics})
+            self.model_info = mlflow.xgboost.log_model(
+                model,
+                name=model_name,
                 registered_model_name=model_name,
                 input_example=X_train
             )
             
             logger.info("\nTraining Metrics:")
-            for metric, value in train_metrics.items():
+            for metric, value in self.train_metrics.items():
                 logger.info(f"{metric}: {value:.4f}")
             
             logger.info("\nValidation Metrics:")
-            for metric, value in val_metrics.items():
+            for metric, value in self.val_metrics.items():
                 logger.info(f"{metric}: {value:.4f}")
         
-            return model, train_metrics, val_metrics
+            return model
