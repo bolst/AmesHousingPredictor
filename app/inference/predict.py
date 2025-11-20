@@ -35,6 +35,7 @@ class AmesPredictor:
         self.tracking_uri = tracking_uri
 
         mlflow.set_tracking_uri(tracking_uri)
+        logger.info(f"mlflow tracking uri set to {tracking_uri}")
         if model is not None:
             self.model = model
         else:
