@@ -10,6 +10,7 @@ class AppSettings:
     KAGGLE_COMPETITION: str = "house-prices-advanced-regression-techniques"
     KAGGLE_DOWNLOAD_PATH: str = f"{DATA_DIRECTORY}/{KAGGLE_COMPETITION}.zip"
 
+    PROD_MODEL_NAME: str = "prod"
 
     LOG_LEVEL: str = "INFO"
     LOG_FILE: str = "logs/app.log"
