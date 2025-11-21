@@ -1,6 +1,4 @@
-.*
 *.ipynb_checkpoints/
-*.db
 __pycache__
 env/
 venv/
