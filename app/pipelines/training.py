@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from ..config.settings import settings
 from loguru import logger
+from datetime import datetime
 
 
 
@@ -26,14 +27,14 @@ class XGBModelTrainer:
             experiment_name: str = settings.MLFLOW_EXPERIMENT_NAME,
             tracking_uri: str = settings.MLFLOW_TRACKING_URI
     ):
-        self.experiment_name = experiment_name
+        self.experiment_name = experiment_name + datetime.now().strftime('%d%m%y%H%M%S')
         self.tracking_uri = tracking_uri
         self.train_metrics = None
         self.val_metrics = None
         self.model_info = None
 
         mlflow.set_tracking_uri(tracking_uri)
-        self.experiment = mlflow.set_experiment(experiment_name)
+        self.experiment = mlflow.set_experiment(self.experiment_name)
 
     
     def train(self, model, model_name: str, X_train, y_train, X_test, y_test):
