@@ -4,6 +4,9 @@
 
 You have two options to run this locally (with or without Docker). You will need the following environment variables. It is suggested to place these in an `.env` file located at the project root.
 
+- `KAGGLE_username` (required): your Kaggle username
+- `KAGGLE_key` (required): your Kaggle API key
+  - more details on the Kaggle environment variables in [phase 0 notebook](./notebooks/phase0_kaggle_download.ipynb)
 - `MLFLOW_BACKEND_URI` (required): URI to the database for logging
 - `MLFLOW_TRACKING_URI` (optional): URI to MLflow tracking server
 - `MLFLOW_S3_ENDPOINT_URL` (optional): URL to S3 bucket
