@@ -13,12 +13,6 @@ def predict(request: Request, input_data: PredictionRequest):
     Endpoint that accepts feature data, runs the data through the model,
     and returns a sale price prediction.
     """
-    if request.state.predictor.model is None:
-        raise HTTPException(
-            status_code=500,
-            detail="Model artifacts failed to load. Check application logs for details.",
-        )
-
     try:
         raw_frame = pd.DataFrame([input_data.features])
         prediction = request.state.predictor.predict(raw_frame, target_transform=request.state.target_transform)
