@@ -8,18 +8,24 @@ from ..config.settings import settings
 
 
 def get_model(model_name) -> PyFuncModel | None:
-    search = mlflow.search_registered_models(filter_string=f"name = '{model_name}'")
-    if not search:
-        raise ArgumentError(f"Could not find any models with the name {model_name}")
+    try:
+        search = mlflow.search_registered_models(filter_string=f"name = '{model_name}'")
+        if not search:
+            logger.error(f"Could not find any models with the name {model_name}")
+            return None
 
-    result = search[0]
-    if not result.latest_versions:
-        raise ArgumentError(f"No versions found for {model_name}")
+        result = search[0]
+        if not result.latest_versions:
+            logger.error(f"No versions found for {model_name}")
+            return None
 
-    source = result.latest_versions[0].source
-    model = mlflow.pyfunc.load_model(source)
-    logger.info(f"loaded model with id {model.model_id}")
-    return model
+        source = result.latest_versions[0].source
+        model = mlflow.pyfunc.load_model(source)
+        logger.info(f"loaded model with id {model.model_id}")
+        return model
+    except Exception as exc:
+        logger.error(f"exception loading model {model_name}: {exc}")
+        return None
 
 
 class AmesPredictor:
@@ -33,17 +39,17 @@ class AmesPredictor:
     ):
         self.feature_engineer = feature_engineer
         self.tracking_uri = tracking_uri
+        self.model_name = model_name
 
         mlflow.set_tracking_uri(tracking_uri)
         logger.info(f"mlflow tracking uri set to {tracking_uri}")
-        if model is not None:
-            self.model = model
-        else:
-            self.model = get_model(model_name)
-            if self.model is None:
-                raise ArgumentError("There was an error loading the model")
+        self.model = model or get_model(model_name)
 
     def predict(self, data, target_transform = None):
+        # try to get the model if not gotten in constructor
+        self.model = self.model or get_model(self.model_name)
+        if self.model is None:
+            raise ModuleNotFoundError("Failed to load model. Check logs for details")
         processed_data = self.feature_engineer.transform(data)
         prediction = self.model.predict(processed_data)
         return prediction if target_transform is None else target_transform(prediction)
