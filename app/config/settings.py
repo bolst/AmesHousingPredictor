@@ -21,7 +21,7 @@ class AppSettings:
 
     # MLflow settings
     MLFLOW_EXPERIMENT_NAME: str = os.getenv("MLFLOW_EXPERIMENT_NAME") or "ames-housing-pricing-experiment"
-    MLFLOW_TRACKING_URI: str = os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"
+    MLFLOW_TRACKING_URI: str = os.getenv("MLFLOW_TRACKING_URI") or "http://127.0.0.1:8500"
 
 # ----------------------------------
 
