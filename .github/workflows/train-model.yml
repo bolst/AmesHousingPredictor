@@ -36,8 +36,8 @@ jobs:
           echo KAGGLE_username=${{ secrets.KAGGLE_USERNAME }} >> .env
           echo KAGGLE_key=${{ secrets.KAGGLE_KEY }} >> .env
 
-      - name: Run training pipeline
-        run: ./scripts/run_notebooks.sh
+      # - name: Run training pipeline
+      #   run: ./scripts/run_notebooks.sh
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
