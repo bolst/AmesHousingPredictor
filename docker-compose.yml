@@ -3,8 +3,41 @@ name: Ames Housing API
 
 services:
   ames-housing-api:
+    env_file: ".env"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:8500
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 8000:8000
+    depends_on:
+      - mlflow
+    networks:
+      - default
+
+
+  mlflow:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.mlflow
+    container_name: mlflow-server
+    env_file: ".env"
+    environment:
+      - MLFLOW_BACKEND_URI=${MLFLOW_BACKEND_URI:?error}
+    command: >
+      mlflow server
+      --backend-store-uri ${MLFLOW_BACKEND_URI}
+      --default-artifact-root s3://mlflow-artifacts/mlruns
+      --allowed-hosts "*"
+      --host 0.0.0.0
+      --port 8500
+    ports:
+      # Expose the MLflow UI
+      - "8500:8500"
+    networks:
+      - default
+  
+networks:
+  default:
+    driver: bridge
