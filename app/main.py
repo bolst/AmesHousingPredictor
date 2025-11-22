@@ -38,3 +38,22 @@ app = FastAPI(
 app.include_router(health.health_router)
 app.include_router(ames.ames_router)
 
+
+import os
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from fastapi import HTTPException
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+INDEX_PATH = FRONTEND_DIR / "index.html"
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="frontend-static")
+
+
+@app.get("/", include_in_schema=False, response_class=HTMLResponse)
+def serve_frontend() -> HTMLResponse:
+    if not INDEX_PATH.exists():
+        raise HTTPException(status_code=404, detail="Frontend not built")
+    api_url = os.getenv("FRONTEND_API_URL", "http://127.0.0.1:8000/predict")
+    html = INDEX_PATH.read_text().replace("__API_URL__", api_url)
+    return HTMLResponse(html)
