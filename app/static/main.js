@@ -94,12 +94,11 @@ const sliderConfigs = [
 ];
 
 const apiMeta = document.querySelector('meta[name="predict-api"]');
-let apiInput;
 let sliderControls;
 let statusEl;
 let sourceEl;
 let updatedEl;
-let defaultApiUrl = apiMeta?.getAttribute('content') || 'http://127.0.0.1:8000/predict';
+let defaultApiUrl = '/api/prediction';
 
 const formatTime = () =>
   new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -244,7 +243,7 @@ function mockPredict(f) {
 }
 
 async function predict() {
-  const apiUrl = (apiInput?.value ?? '').trim();
+  const apiUrl = defaultApiUrl;
   const btn = document.getElementById('predictBtn');
   const priceEl = document.getElementById('price');
   if (btn) btn.disabled = true;
@@ -306,8 +305,6 @@ function init() {
   const predictBtn = document.getElementById('predictBtn');
   predictBtn?.addEventListener('click', predict);
 
-  if (apiInput && !apiInput.value) apiInput.value = defaultApiUrl;
-
   ['Neighborhood', 'KitchenQual', 'CentralAir', 'SaleCondition'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
@@ -317,7 +314,6 @@ function init() {
 }
 
 function bootstrap() {
-  apiInput = document.getElementById('apiUrl');
   sliderControls = document.getElementById('sliderControls');
   statusEl = document.getElementById('resultStatus');
   sourceEl = document.getElementById('resultSource');
