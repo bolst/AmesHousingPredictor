@@ -35,6 +35,7 @@ jobs:
           touch .env
           echo KAGGLE_username=${{ secrets.KAGGLE_USERNAME }} >> .env
           echo KAGGLE_key=${{ secrets.KAGGLE_KEY }} >> .env
+          echo MLFLOW_BACKEND_URI=${{ secrets.MLFLOW_BACKEND_URI }} >> .env
 
       # - name: Run training pipeline
       #   run: ./scripts/run_notebooks.sh
