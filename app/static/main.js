@@ -1,4 +1,15 @@
-const fmtCurrency = n => n.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const fmtCurrency = (n_low, n_high) => {
+    const fmt = n => n.toLocaleString(undefined, {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0
+    });
+
+    return n_low !== n_high
+        ? `${fmt(n_low)} - ${fmt(n_high)}`
+        : fmt(n_high);
+};
+
 const defaultFeatures = {
   Id: 1,
   MSSubClass: 60,
@@ -253,12 +264,14 @@ async function predict() {
     const features = getFeatures();
     const body = { features };
     let price;
+    let error = 1;
     let sourceLabel = apiUrl ? 'FastAPI model' : 'Mock model';
     let statusVariant = 'success';
     let statusText = 'Prediction ready';
 
     if (!apiUrl) {
       price = mockPredict(features);
+      error = 1;
     } else {
       try {
         const res = await fetch(apiUrl, {
@@ -268,6 +281,12 @@ async function predict() {
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
+        if (typeof data.error === 'number') {
+          error = (Math.E ** data.error);
+        }
+        else {
+          error = 1;
+        }
         if (typeof data.price === 'number') {
           price = data.price;
         } else if (typeof data.prediction === 'number') {
@@ -283,8 +302,10 @@ async function predict() {
         statusText = 'Using mock estimate';
       }
     }
+    price_low = price / error;
+    price_high = price * error;
 
-    if (priceEl) priceEl.textContent = typeof price === 'number' ? fmtCurrency(price) : '—';
+    if (priceEl) priceEl.textContent = typeof price === 'number' ? fmtCurrency(price_low, price_high) : '—';
     setSource(sourceLabel);
     setUpdated(price ? formatTime() : '—');
     setStatus(statusText, statusVariant);

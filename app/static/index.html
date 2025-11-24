@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <title>House Price Estimator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
@@ -88,43 +88,49 @@
             </select>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <button id="predictBtn">Predict Price</button>
-          </div>
+          </div> -->
         </div>
       </div>
 
       <!-- Output -->
-      <div class="card result-card">
-        <div class="card-header">
-          <p class="card-title">Prediction Output</p>
-        </div>
-        <div class="card-body">
-          <div class="price-highlight">
-            <div>
-              <div class="small">Estimated listing</div>
-              <div id="price" class="price">—</div>
+      <div>
+        <div class="card result-card">
+          <div class="card-header">
+            <p class="card-title">Prediction Output</p>
+          </div>
+          <div class="card-body">
+            <div class="price-highlight">
+              <div>
+                <div class="small">Estimated listing</div>
+                <div id="price" class="price">—</div>
+              </div>
+              <!-- <span id="resultStatus" class="status-pill status-pill--idle">Waiting for inputs</span> -->
             </div>
             <span id="resultStatus" class="status-pill status-pill--idle">Waiting for inputs</span>
-          </div>
-          <p class="meta-note">Adjust sliders to explore different pricing scenarios. We’ll show the most recent
-            prediction here.</p>
-          <div class="result-meta">
-            <div>
-              <div class="meta-label">Source</div>
-              <div id="resultSource" class="meta-value">—</div>
+            <p class="meta-note">Adjust sliders to explore different pricing scenarios. We’ll show the most recent
+              prediction here.</p>
+            <div class="result-meta">
+              <div>
+                <div class="meta-label">Source</div>
+                <div id="resultSource" class="meta-value">—</div>
+              </div>
+              <div>
+                <div class="meta-label">Last updated</div>
+                <div id="resultUpdated" class="meta-value">—</div>
+              </div>
             </div>
-            <div>
-              <div class="meta-label">Last updated</div>
-              <div id="resultUpdated" class="meta-value">—</div>
-            </div>
           </div>
+        </div>
+        <div class="row">
+          <button id="predictBtn">Predict Price</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="/main.js"></script>
+  <script src="./main.js"></script>
 </body>
 
 </html>

@@ -59,7 +59,7 @@ button { background:var(--accent); color:white; border:none; cursor:pointer; tra
 button:hover { background:var(--accent-dark); }
 button:active { transform: scale(.99); }
 button:disabled { opacity:.6; cursor:not-allowed; }
-.price { font-size: 32px; font-weight:700; letter-spacing: .3px; }
+.price { font-size: 30px; font-weight:700; letter-spacing: .3px; }
 .small { font-size:12px; color:#64748b; }
 .slider-wrap { position:relative; margin-top:8px; padding-top:12px; }
 .slider-wrap input[type="range"] {
@@ -146,7 +146,7 @@ button:disabled { opacity:.6; cursor:not-allowed; }
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  /* gap:16px; */
   padding:8px 0;
 }
 .status-pill {
