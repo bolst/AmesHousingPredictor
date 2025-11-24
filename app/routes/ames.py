@@ -19,6 +19,6 @@ def predict(request: Request, input_data: PredictionRequest):
         print(f"prediction: {prediction}")
     except Exception as exc:  # noqa: BLE001
         logger.exception("Prediction failed")
-        raise HTTPException(status_code=400, detail=f"Failed to generate prediction: {exc}") from exc
+        raise HTTPException(status_code=500, detail=f"Failed to generate prediction: {exc}") from exc
 
     return PredictionResponse(prediction=float(prediction.flat[0]), model_path='???')
