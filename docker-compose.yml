@@ -3,6 +3,7 @@ name: Ames Housing API
 
 services:
   ames-housing-api:
+    image: ${REGISTRY_IMAGE:-ames-housing-api}
     env_file: ".env"
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:8500
