@@ -19,6 +19,7 @@ services:
 
 
   mlflow:
+    image: ${MLFLOW_IMAGE:-mlflow-server}
     build:
       context: .
       dockerfile: ./Dockerfile.mlflow
