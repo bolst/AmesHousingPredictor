@@ -2,3 +2,10 @@ FROM ghcr.io/mlflow/mlflow:v3.6.0
 
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir boto3==1.37.11 psycopg2-binary==2.9.10
+
+CMD mlflow server \
+    ${MLFLOW_BACKEND_URI:+--backend-store-uri $MLFLOW_BACKEND_URI} \
+    --default-artifact-root s3://mlflow-artifacts/mlruns \
+    --allowed-hosts "*" \
+    --host 0.0.0.0 \
+    --port 8500
