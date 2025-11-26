@@ -47,7 +47,7 @@ class AmesPredictor:
 
     def predict(self, data, target_transform = None):
         # try to get the model if not gotten in constructor
-        self.model = self.model or get_model(self.model_name)
+        self.model = get_model(self.model_name)
         if self.model is None:
             raise ModuleNotFoundError("Failed to load model. Check logs for details")
         processed_data = self.feature_engineer.transform(data)
