@@ -95,8 +95,6 @@ class XGBModelTrainer:
                 input_example=X_train
             )
             
-            mlflow.set_tag('hello', 'there')
-            
             logger.info("\nTraining Metrics:")
             for metric, value in self.train_metrics.items():
                 logger.info(f"{metric}: {value:.4f}")
