@@ -19,6 +19,13 @@ class AppSettings:
     LOG_FILE: str = os.getenv("LOG_FILE") or "logs/app.log"
 
 
+    # for some reason pandas/sklearn has very ambiguous NaN handling...
+    # e.g., if we have a NaN in a string column doing df['string_col'] == pd.NA doesn't return True
+    # you'd typically do df.isna() or something but we can't use that for pipelines
+    # use this as workaround
+    CATEGORICAL_NAN: str = "N/A"
+
+
     # MLflow settings
     MLFLOW_EXPERIMENT_NAME: str = os.getenv("MLFLOW_EXPERIMENT_NAME") or "ames-housing-pricing-experiment"
     MLFLOW_TRACKING_URI: str = os.getenv("MLFLOW_TRACKING_URI") or "http://127.0.0.1:8500"

@@ -20,8 +20,8 @@ class DataReader:
         test_df = pd.read_csv(test_path, index_col="Id")
 
         cols = train_df.select_dtypes('object').columns
-        train_df[cols] = train_df[cols].astype('string')
-        test_df[cols] = test_df[cols].astype('string')
+        train_df[cols] = train_df[cols].astype('string').fillna(settings.CATEGORICAL_NAN)
+        test_df[cols] = test_df[cols].astype('string').fillna(settings.CATEGORICAL_NAN)
 
         train_df = train_df.fillna(np.nan)
         test_df = test_df.fillna(np.nan)
